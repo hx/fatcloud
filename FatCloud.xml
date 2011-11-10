@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE fatcloud [
+	<!ELEMENT fatcloud (fonts, skins)>
+	<!ELEMENT fonts (font+)>
+		<!ELEMENT font (#PCDATA)>
+	<!ELEMENT skins (skin+)>
+		<!ELEMENT skin (name?, shortName, description?, options?)>
+		<!ELEMENT name (#PCDATA)>
+		<!ELEMENT shortName (#PCDATA)>
+		<!ELEMENT description (#PCDATA)>
+		<!ELEMENT options (option*)>
+			<!ELEMENT option (name?, shortName, description?, default?, enum?)>
+			<!ATTLIST option type (string|number|color|font|enum) #REQUIRED>
+			<!ELEMENT default (#PCDATA)>
+			<!ELEMENT enum (value+)>
+				<!ELEMENT value (#PCDATA)>
+]>
+<fatcloud>
+	<fonts>
+		<font>Expressway</font>
+        <font>Meloche</font>
+        <font>Museo</font>
+        <font>Negotiate</font>
+        <font>Report</font>
+	</fonts>
+	<skins>
+		<skin>
+			<name>Wordle</name>
+			<shortName>Wordle</shortName>
+			<description>
+				Flash recreation of the popular Wordle tag cloud generator. Uses advanced algorithms to fit different sized and angled words together in a really cool way.
+			</description>
+			<options>
+				<option type="enum">
+					<name>Text Angle</name>
+					<shortName>textAngle</shortName>
+					<description>The angle(s) to rotate the tags with</description>
+					<default>Horizontal/Vertical</default>
+					<enum>
+						<value>Horizontal</value>
+						<value>Vertical</value>
+						<value>Horizontal/Vertical</value>
+						<value>45 Degrees</value>
+						<value>Random (all the same)</value>
+						<value>Random (all different)</value>
+					</enum>
+				</option>
+				<option type="number">
+					<name>Size Ratio</name>
+					<shortName>sizeRatio</shortName>
+					<description>The biggest tag will be this many times bigger than the smallest tag</description>
+					<default>12</default>
+				</option>
+				<option type="enum">
+					<name>Color Scheme</name>
+					<shortName>colorScheme</shortName>
+					<description>Colors for text and background.</description>
+					<default>Custom</default>
+					<enum>
+						<value>Aqua</value>
+						<value>Dessert</value>
+						<value>Custom</value>
+						<value>Random</value>
+					</enum>
+				</option>
+				<option type="color">
+					<name>Foreground Colour</name>
+					<shortName>fgColor</shortName>
+					<description>Color of large tags (select 'Custom' Color Scheme above)</description>
+					<default>#2A4068</default>
+				</option>
+				<option type="color">
+					<name>Midground Colour</name>
+					<shortName>mgColor</shortName>
+					<description>Color of small tags (select 'Custom' Color Scheme above)</description>
+					<default>#528BBE</default>
+				</option>
+				<option type="color">
+					<name>Selector Colour</name>
+					<shortName>sColor</shortName>
+					<description>Background color of tag selected tag (select 'Custom' Color Scheme above)</description>
+					<default>#D7D7D7</default>
+				</option>
+				<option type="color">
+					<name>Background Colour</name>
+					<shortName>bgColor</shortName>
+					<description>Color of tag cloud background (select 'Custom' Color Scheme above)</description>
+					<default>#FFFFFF</default>
+				</option>
+				<option type="font">
+					<name>Font</name>
+					<shortName>font</shortName>
+					<description>Font to use for text</description>
+					<default>Report</default>
+				</option>
+				<option type="enum">
+					<name>Use random font?</name>
+					<shortName>randomFont</shortName>
+					<description>Use a random font on each load. If yes, the above font selection will be ignored.</description>
+					<default>No</default>
+					<enum>
+						<value>Yes</value>
+						<value>No</value>
+					</enum>
+				</option>
+			</options>
+		</skin>
+		<skin>
+			<name>Simple Skin</name>
+			<shortName>SimpleSkin</shortName>
+			<description>
+				Prototype skin. Developers may want to tinker with this skin when developing their own.
+			</description>
+			<options>
+				<option type="color">
+					<name>Foreground Colour</name>
+					<shortName>fgColor</shortName>
+					<description>Color of tag text</description>
+					<default>#000000</default>
+				</option>
+				<option type="color">
+					<name>Background Colour</name>
+					<shortName>bgColor</shortName>
+					<description>Color of tag cloud background</description>
+					<default>#FFFFFF</default>
+				</option>
+				<option type="font">
+					<name>Font</name>
+					<shortName>font</shortName>
+					<description>Font to use for text</description>
+					<default>Expressway</default>
+				</option>
+				<option type="number">
+					<name>Font Size</name>
+					<shortName>fontSize</shortName>
+					<description>Tag text font size</description>
+					<default>16</default>
+				</option>
+			</options>
+		</skin>
+	</skins>
+</fatcloud>

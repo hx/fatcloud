@@ -1,0 +1,143 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <title>FatCloud</title>
+        <style type="text/css">
+			body {
+				font-family:Georgia, "Times New Roman", Times, serif;
+				font-size:14px;
+				color:#004;
+				width:50em;
+			}
+			h1,a {
+				color:#f60;
+			}
+			a:hover {
+				text-decoration:none;
+			}
+			h2 {
+				color:#666;
+				font-family:Helvetica, Arial, sans-serif;
+			}
+			h3 {
+				color:#036;	
+			}
+			pre {
+				border:1px solid #069;
+				background:#E9ECFD;
+				padding:6px 8px;
+			}
+			code {
+				color:#666;
+			}
+			li {
+				margin-bottom:0.5em;
+			}
+		</style>
+    </head>
+    <body>
+        <h1>
+            FatCloud by NetLife</h1>
+    <h2>About FatCloud</h2>
+    <p>FatCloud renders graphically rich tag clouds using Flash layered on top of regular HTML tag clouds, inheriting their properties, including text, URLs, size and DOM tab index.</p>
+    <p>When FatCloud draws an SWF, it leaves the original HTML tag cloud in tact, ensuring search engine indexability and web accessability.</p>
+    <h2>How to use FatCloud</h2>
+    <h3>In JavaScript:</h3>
+    <ol>
+    <li><p>Include the <code>FatCloud.js</code> somewhere in your HTML page before you insert any FatCloud objects.</p>
+    <pre>&lt;script type="text/javascript" src="FatCloud.js"&gt;&lt;/script&gt;</pre>
+    </li>
+      <li>
+      <p>Create a tag cloud in HTML. For example:</p>
+      <pre>&lt;div id="myCloud"&gt;
+	&lt;a href="one" style="font-size:1em"&gt;One&lt;/a&gt;
+	&lt;a href="two" style="font-size:1.5em"&gt;Two&lt;/a&gt;
+&lt;/div&gt;</pre>
+      </li>
+      <li><p>Insert some inline JavaScript anywhere in your document (ideally, for neatness, directly after the tag cloud HTML):</p>
+      <pre>&lt;script type="text/javascript"&gt; ... &lt;/script&gt;</pre>
+      </li>
+      <li>
+      <p>Inside aforesaid script block, create a new FatCloud object:</p>
+      <pre>// syntax: var myVar = new FatCloud(id_of_tag_cloud, name_of_skin);
+var myCloud=new FatCloud('myCloud', 'Wordle');</pre>
+      </li>
+      <li><p>Set skin options (check <a href="FatCloud.xml">FatCloud.xml</a> for individual skin options):</p>
+      <pre>myCloud.options.textAngle='Horizontal';
+myCloud.options.colorScheme='Aqua';</pre>
+      </li>
+      <li><p>If <code>FatCloud.swf</code> isn't in the same directory as your HTML file, at some point, set the <code>fatCloud.SWF</code> value to its URL (relative URLs are OK):</p>
+      <pre>fatCloud.SWF='path/to/FatCloud.swf';</pre>
+      </li>
+    </ol>
+    <h3>In PHP:</h3>
+    <p>If you use PHP to generate your FatCloud, you'll be able to take advantage of FatCloud's built-in server-side caching system. This can dramatically increase performance in tag clouds which have high client-side CPU costs (such as the Wordle skin).</p>
+    <p>The PHP method is the prefered method to generate FatClouds. You should only use JavaScript if you're on a server without PHP support.</p>
+    <ol>
+    <li><p>Include the <code>FatCloud.js</code> and <code>FatCloud.php</code> files in your PHP page before you insert any FatCloud objects.</p>
+    <pre>&lt;?php require_once('FatCloud.php'); ?&gt;
+&lt;script type="text/javascript" src="FatCloud.js"&gt;&lt;/script&gt;</pre>
+	</li>
+    <li>
+    <p>Create a tag cloud in HTML. For example:</p>
+      <pre>&lt;div id="myCloud"&gt;
+	&lt;a href="one" style="font-size:1em"&gt;One&lt;/a&gt;
+	&lt;a href="two" style="font-size:1.5em"&gt;Two&lt;/a&gt;
+&lt;/div&gt;</pre>
+      </li>
+      <li><p>Insert a pair of PHP delimiters anywhere in your document (ideally, for neatness, directly after the tag cloud HTML):</p>
+      <pre>&lt;?php ... ?&gt;</pre>
+      </li>
+      <li><p>If <code>FatCloud.swf</code> isn't in the same directory as your PHP file, inside your PHP delimiters, set the <code>FatCloud::$SWF</code> value to its URL (relative URLs are OK):</p>
+      <pre>FatCloud::$SWF = 'path/to/FatCloud.swf';</pre>
+      </li>
+      <li><p>Create a new FatCloud object:</p>
+      <pre>// syntax: $myCloud = new FatCloud(id_of_tag_cloud, name_of_skin);
+$myCloud = new FatCloud('myCloud', 'Wordle');</pre>
+</li>
+		<li><p>Set skin options (check <a href="FatCloud.xml">FatCloud.xml</a> for individual skin options):</p>
+        <pre>$myCloud->options['textAngle'] = 'Horizontal';
+$myCloud->options['colorScheme'] = 'Aqua';</pre>
+	</li>
+    <li><p>Echo your FatCloud object to generate the FatCloud JavaScript code which creates the SWF object.</p>
+    <pre>echo $myCloud;</pre>
+    </li>
+    </ol>
+    <h2>Skin Caching Options</h2>
+    <p>When FatCloud skins have performed lengthy calculations, it can use an AJAX call to store the results on the server. By default, results are stored in a single file <code>FatCloud.sc</code> in the same directory as <code>FatCloud.php</code>. If you have disk access permission issues, you can instead store results in a single MySQL text field. This option is available regardless of which method you use (PHP or JavaScript) to generate your clouds.</p>
+    <p>To enable MySQL skin cache storage, set the following values:</p>
+    <pre>FatCloud::$dbHost='hostname';
+FatCloud::$dbUser='username';
+FatCloud::$dbPass='password';
+FatCloud::$dbName='database_name';
+FatCloud::$dbTable='table_name';
+FatCloud::$dbKeyField='tables_primary_key_field';
+FatCloud::$dbKeyValue='unique_id_of_row';
+FatCloud::$dbValueField='text_field_to_store_cache';</pre>
+    <h2>Skin Development</h2>
+    <p>Making new skins for FatCloud is fairly straightforward. Most of the tiresome to-and-fro between the DOM and AS3 platforms is taken care of. Before you start, make sure:</p>
+    <ul>
+      <li>You're familiar with object-orientated ActionScript 3 coding</li>
+      <li>You understand DTDs and well-formed XML</li>
+      <li>You have a copy of <a href="http://www.adobe.com/products/flash/">Adobe Flash CS4</a> or later installed</li>
+      <li>All the fonts listed in <code>FatCloud.xml</code> are installed on your computer</li>
+    </ul>
+    <p>You don't need to know JavaScript or PHP to write skins for FatCloud, but it'll probably help to have some background.    </p>
+    <p>Every FatCloud skin is an extension of the <code>FatCloudSkin</code> ActionScript 3 class, and part of the <code>Skins</code> package. The <code>SimpleSkin</code> class contains all the necessary elements of a working FatCloud skin, so it's the best place to start looking for what to do. When you think you're done, compile <code>FatCloud.fla</code> and off you go!</p>
+    <p>Here are a few important points to remember:</p>
+    <ul>
+      <li>Every skin needs to be registered in <code>FatCloud.xml</code> in order to be recognised by GUIs like <a href="http://www.wordpress.org">WordPress</a>, and to supply defaults to the SWF. Add your skin and its options to the <code>&lt;skins /&gt;</code> section of<code> FatCloud.xml</code> as per the embedded DTD.</li>
+      <li>Because Flash only compiles SWFs with classes explicitly declared at design-time, you need to declare a dummy variable with your skin's class name somewhere in the main program. There's a section set aside at the top of <code>FatCloud.as</code> for this purpose.</li>
+      <li>FatCloud will set the <code>stage.stageWidth</code> and<code> stage.stageHeight</code> properties before instantiating your skin. Use this properties to help lay out your graphics.</li>
+      <li>Your skin needs a <code>render()</code> function, which is called when the cloud is first displayed, and whenever it's resized. Try to avoid unnecessary re-rendering – your class's<code> .firstRender</code> boolean property will help here.</li>
+      <li>The tags you need to render are all in the <code>FatCloud.tags</code> array. Each tag object has a <code>label</code> property as a string of the tag's value, and a <code>scale</code> property between 0 (smallest) and 1 (largest).</li>
+      <li>Skin options set at runtime are available from the <code>FatCloud.options</code> object, eg. <code>FatCloud.options.textAngle</code> etc. Don't worry about the user skipping options; defaults will be loaded from <code>FatCloud.xml</code> prior to instantiation.</li>
+      <li>The XML file's font list is loaded into the <code>FatCloud.fonts</code> array. Many fonts have internal names which differ from their visible names, so when assigning fonts to text fields, rather than simply using a font string, use <code>FatCloud.fontName(FatCloud.fonts[x])</code> instead. This function will attempt to retrieve the internal name of the font, reducing the chance of a runtime error.</li>
+      <li>Your skin's tag focus needs to be synchronised with the DOM's focussed tag in order to function properly. Listen for the <code>receiveDOMTagEvent</code> event in your skin's root namespace, and call the<code> tagFocus()</code>, <code>tagBlur()</code> and <code>tagSelect()</code> functions when necessary. This isn't as hard as it sounds – check out the <code>SimpleSkin</code> class for clarification.</li>
+    </ul>
+    <h2>GUI Development</h2>
+    <p>FatCloud can be run stand-alone or as a WordPress plugin, but you can also write a GUI for virtually any framework. Such development is beyond the scope of this manual, but you can check out the code of the <code>wp_tag_cloud.php</code> file for some good pointers.</p>
+    <p>If you use a PHPDoc-enabled IDE such as <a href="http://www.netbeans.org">NetBeans</a> or <a href="http://www.eclipse.org">Eclipse</a>, you can navigate fairly swiftly through the <code>FatCloud::$skins</code> and <code>FatCloud::$fonts</code> arrays; these two variables contain virtually all the information (parsed from <code>FatCloud.xml</code> when you include <code>FatCloud.php</code>) that you'll need.</p>
+    </body>
+</html>
